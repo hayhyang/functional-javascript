@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const users = [
+        { id: 1, name: "a", age: 18 },
+        { id: 2, name: "b", age: 28 },
+        { id: 3, name: "c", age: 36 },
+        { id: 4, name: "d", age: 24 },
+        { id: 5, name: "e", age: 42 },
+        { id: 6, name: "f", age: 35 },
+        { id: 7, name: "g", age: 17 },
+        { id: 8, name: "h", age: 29 },
+      ];
+
+      // 1. 명령형 코드
+      // 1. 30세 이상인 유저를 거른다.
+      let temp_users = [];
+      for (let i = 0; i < users.length; i++) {
+        if (users[i].age >= 30) {
+          temp_users.push(users[i]);
+        }
+      }
+      console.log(temp_users);
+
+      // 2. 30세 이상인 유저의 names를 수집한다.
+      let names = [];
+      for (let i = 0; i < temp_users.length; i++) {
+        names.push(temp_users[i].name);
+      }
+      console.log(names);
+
+      // 3. 30세 미만인 유저를 거른다.
+      let temp_users2 = [];
+      for (let i = 0; i < users.length; i++) {
+        if (users[i].age < 30) {
+          temp_users2.push(users[i]);
+        }
+      }
+      console.log(temp_users2);
+
+      // 4. 30tp 미만인 유저의 ages를 수집한다.
+      let ages = [];
+      for (let i = 0; i < temp_users2.length; i++) {
+        ages.push(temp_users2[i].age);
+      }
+      console.log(ages);
+
+      // 2. 함수형 코드
+      // _filter, _map으로 리팩토링
+      function _filter(list, predi) {
+        let new_list = [];
+        for (let i = 0; i < list.length; i++) {
+          if (predi(list[i])) {
+            new_list.push(list[i]);
+          }
+        }
+        return new_list;
+      }
+      // 1. 30세 이상인 유저를 거른다.
+      console.log(_filter(users, (user) => user.age >= 30));
+      // 3. 30세 미만인 유저를 거른다.
+      console.log(_filter(users, (user) => user.age < 30));
+
+      // _filter 함수는 인자에 따라서 여러곳에서 재사용 가능하다.
+      console.log(_filter([1, 2, 3, 4], (num) => num % 2));
+      console.log(_filter([1, 2, 3, 4], (num) => !(num % 2)));
+
+      // _map
+      function _map(list, mapper) {
+        let new_list = [];
+        for (let i = 0; i < list.length; i++) {
+          new_list.push(mapper(list[i]));
+        }
+        return new_list;
+      }
+      // _filter, _map 모두 데이터가 어떻게 생겼는지는 상관없고 자신의 로직만 실행한다. >> 관심사의 분리
+
+      const over_30 = _filter(users, (user) => user.age >= 30);
+      const over_30_names = _map(over_30, (user) => user.name);
+
+      const under_30 = _filter(users, (user) => user.age < 30);
+      const under_30_ages = _map(under_30, (user) => user.age);
+
+      console.log(over_30);
+      console.log(over_30_names);
+      console.log(under_30);
+      console.log(under_30_ages);
+    </script>
+  </body>
+</html>
