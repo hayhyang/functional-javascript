@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <script src="js/_.js"></script>
   </head>
   <body>
     <script>
@@ -54,15 +55,7 @@
 
       // 2. 함수형 코드
       // _filter, _map으로 리팩토링
-      function _filter(list, predi) {
-        let new_list = [];
-        for (let i = 0; i < list.length; i++) {
-          if (predi(list[i])) {
-            new_list.push(list[i]);
-          }
-        }
-        return new_list;
-      }
+
       // 1. 30세 이상인 유저를 거른다.
       console.log(_filter(users, (user) => user.age >= 30));
       // 3. 30세 미만인 유저를 거른다.
@@ -72,14 +65,6 @@
       console.log(_filter([1, 2, 3, 4], (num) => num % 2));
       console.log(_filter([1, 2, 3, 4], (num) => !(num % 2)));
 
-      // _map
-      function _map(list, mapper) {
-        let new_list = [];
-        for (let i = 0; i < list.length; i++) {
-          new_list.push(mapper(list[i]));
-        }
-        return new_list;
-      }
       // _filter, _map 모두 데이터가 어떻게 생겼는지는 상관없고 자신의 로직만 실행한다. >> 관심사의 분리
 
       const over_30 = _filter(users, (user) => user.age >= 30);
