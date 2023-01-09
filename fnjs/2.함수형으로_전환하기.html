@@ -81,25 +81,6 @@
       // 커링: 함수와 인자를 다루는 기밥
       // 함수의 인자를 하나씩 적용해 나가다가 필요한 인자가 모두 채워지면 함수 본체를 실행하는 기법
       // js에서는 커링이 지원되지 않지만 일급함수가 지원되고 평가시점을 마음대로 다룰수 있어 커링기법을 구현할 수 있다.
-      function _curry(fn) {
-        return function (a, b) {
-          return arguments.length === 2
-            ? fn(a, b)
-            : function (b) {
-                return fn(a, b);
-              };
-        };
-      }
-
-      function _curryr(fn) {
-        return function (a, b) {
-          return arguments.length === 2
-            ? fn(a, b)
-            : function (b) {
-                return fn(b, a);
-              };
-        };
-      }
 
       const add = _curry(function (a, b) {
         return a + b;
@@ -115,9 +96,6 @@
       console.log(sub10(5));
 
       // _get
-      function _get(obj, key) {
-        return obj == null ? undefined : obj[key];
-      }
 
       const user1 = users[0];
       console.log(user1.name);
