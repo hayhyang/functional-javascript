@@ -41,9 +41,20 @@ function _map(list, mapper) {
   return new_list;
 }
 
+function _is_object(obj) {
+  return typeof obj == "object" && !!obj;
+}
+
+function _keys(obj) {
+  return _is_object(obj) ? Object.keys(obj) : [];
+}
+
+const _length = _get("length");
+
 function _each(list, iter) {
-  for (let i = 0; i < list.length; i++) {
-    iter(list[i]);
+  const keys = _keys(list);
+  for (var i = 0, len = keys.length; i < len; i++) {
+    iter(list[keys[i]], keys[i]);
   }
   return list;
 }
@@ -77,7 +88,7 @@ function _pipe() {
   };
 }
 
-function _fo(arg) {
+function _go(arg) {
   const fns = _rest(arguments);
   return _pipe.apply(null, fns)(arg);
 }
