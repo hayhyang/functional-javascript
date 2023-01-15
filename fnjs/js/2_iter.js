@@ -47,3 +47,27 @@ for (const a of mapIter) console.log(a);
 // - 이터러블 : 이터레이터를 리턴하는 [Symbol.iterator()] 메서드를 가진 값
 // - 이터레이터: {value, done} 객체를 리턴하는 next()메서드를 가진 값
 // 이터러블/에터레이터 프로토콜: 이터러블을 for...of, 전개 연산자 등과 함게 동작하도록한 규약
+
+console.log("Iterable ---------");
+// 사용자 정의 이터러블을 통해 알아보기
+const iterable = {
+  [Symbol.iterator]() {
+    let i = 3;
+    return {
+      next() {
+        return i === 0 ? { done: true } : { value: i--, done: false };
+      },
+      [Symbol.iterator]() {
+        return this;
+      },
+    };
+  },
+};
+
+let iterator = iterable[Symbol.iterator]();
+// console.log(iterator.next());
+// console.log(iterator.next());
+// console.log(iterator.next());
+// console.log(iterator.next());
+
+for (const a of iterator) console.log(a);
