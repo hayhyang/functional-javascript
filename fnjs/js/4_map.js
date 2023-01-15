@@ -25,3 +25,19 @@ console.log(prices);
 const dom = document.querySelectorAll("*");
 console.log(map((e) => e, dom));
 console.log(map((e) => e.nodeName, dom));
+
+function* gen() {
+  yield 2;
+  if (false) yield 3;
+  yield 4;
+}
+
+console.log(map((a) => a * a, gen()));
+
+const m = new Map();
+m.set("a", 10);
+m.set("b", 9);
+m.set("c", 8);
+const mIter = m[Symbol.iterator]();
+console.log(mIter.next());
+console.log(new Map(map(([k, v]) => [k, v * 2], m)));
