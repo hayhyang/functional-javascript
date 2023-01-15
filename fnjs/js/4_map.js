@@ -18,5 +18,10 @@ const map = (f, iter) => {
 
 const names = map((item) => item.name, products);
 console.log(names);
+
 const prices = map((item) => item.price, products);
 console.log(prices);
+
+const dom = document.querySelectorAll("*");
+console.log(map((e) => e, dom));
+console.log(map((e) => e.nodeName, dom));

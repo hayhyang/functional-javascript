@@ -34,12 +34,12 @@ for (const a of set) console.log(a);
 
 console.log("Map ---------");
 // Map
-const map = new Map([
+const map1 = new Map([
   ["a", 1],
   ["b", 2],
   ["c", 3],
 ]);
-const mapIter = map[Symbol.iterator]();
+const mapIter = map1[Symbol.iterator]();
 mapIter.next();
 for (const a of mapIter) console.log(a);
 
