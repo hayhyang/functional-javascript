@@ -16,6 +16,16 @@ const map = (f, iter) => {
   return result;
 };
 
+const filter = (f, iter) => {
+  let result = [];
+  for (const a of iter) {
+    if (f(a)) result.push(a);
+  }
+  return result;
+};
+
+console.log(filter((a) => a.price < 5000, products));
+
 const names = map((item) => item.name, products);
 console.log(names);
 
