@@ -34,9 +34,9 @@ log(names);
 const prices = map((item) => item.price, products);
 log(prices);
 
-const dom = document.querySelectorAll("*");
-log(map((e) => e, dom));
-log(map((e) => e.nodeName, dom));
+// const dom = document.querySelectorAll("*");
+// log(map((e) => e, dom));
+// log(map((e) => e.nodeName, dom));
 
 function* gen() {
   yield 2;
@@ -65,13 +65,15 @@ const reduce = (f, acc, iter) => {
     iter = acc[Symbol.iterator]();
     acc = iter.next().value;
   }
-  let acc = 0;
+  let ac = 0;
   for (const a of iter) {
-    acc = f(acc, a);
+    ac = f(ac, a);
   }
-  return acc;
+  return ac;
 };
 const add = (a, b) => a + b;
 log(reduce(add, 0, [1, 2, 3, 4, 5]));
 
 log(total);
+
+log(reduce((totalprice, product) => totalprice + product.price, 0, products));
