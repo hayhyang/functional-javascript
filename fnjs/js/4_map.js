@@ -1,3 +1,5 @@
+const log = console.log;
+
 const products = [
   { name: "tv", price: 1000 },
   { name: "radio", price: 6000 },
@@ -24,17 +26,17 @@ const filter = (f, iter) => {
   return result;
 };
 
-console.log(filter((a) => a.price < 5000, products));
+log(filter((a) => a.price < 5000, products));
 
 const names = map((item) => item.name, products);
-console.log(names);
+log(names);
 
 const prices = map((item) => item.price, products);
-console.log(prices);
+log(prices);
 
 const dom = document.querySelectorAll("*");
-console.log(map((e) => e, dom));
-console.log(map((e) => e.nodeName, dom));
+log(map((e) => e, dom));
+log(map((e) => e.nodeName, dom));
 
 function* gen() {
   yield 2;
@@ -42,12 +44,34 @@ function* gen() {
   yield 4;
 }
 
-console.log(map((a) => a * a, gen()));
+log(map((a) => a * a, gen()));
 
 const m = new Map();
 m.set("a", 10);
 m.set("b", 9);
 m.set("c", 8);
 const mIter = m[Symbol.iterator]();
-console.log(mIter.next());
-console.log(new Map(map(([k, v]) => [k, v * 2], m)));
+log(mIter.next());
+log(new Map(map(([k, v]) => [k, v * 2], m)));
+
+const nums = [1, 2, 3, 4, 5];
+let total = 0;
+for (const n of nums) {
+  total = total + n;
+}
+
+const reduce = (f, acc, iter) => {
+  if (!iter) {
+    iter = acc[Symbol.iterator]();
+    acc = iter.next().value;
+  }
+  let acc = 0;
+  for (const a of iter) {
+    acc = f(acc, a);
+  }
+  return acc;
+};
+const add = (a, b) => a + b;
+log(reduce(add, 0, [1, 2, 3, 4, 5]));
+
+log(total);
